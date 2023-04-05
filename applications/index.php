@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 include dirname(__DIR__, 1) . '\get_db_info.php';
 
-$full_data_list=get_db_full_table('applications');
+$data_list=get_db_full_table_applications();
 
 ?>
 
@@ -16,15 +16,11 @@ $full_data_list=get_db_full_table('applications');
     <th>ID заявки</th>
     <th>ФИО клиента</th>
   </tr>
-  <?php foreach ($full_data_list as $record):?>
+  <?php foreach ($data_list as $record):?>
   <tr>
     <td><?php print($record['id'])?></td>
-    <td><a href=<?php print("/managers/page?id=".$record['id'])?>><?php print($record['full_name'])?></a></td>
+    <td><a href=<?php print("/applications/page.php?id=".$record['id'])?>><?php print($record['full_name'])?></a></td>
   </tr>
   <?php endforeach; ?>
 </table>
 </html>
-
-
-
-
