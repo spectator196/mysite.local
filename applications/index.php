@@ -3,7 +3,7 @@
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include 'C:\OSPanel\domains\mysite.local\get_db_info.php';
+include dirname(__DIR__, 1) . '\get_db_info.php';
 
 $full_data_list=get_db_full_table('applications');
 
@@ -19,7 +19,7 @@ $full_data_list=get_db_full_table('applications');
   <?php foreach ($full_data_list as $record):?>
   <tr>
     <td><?php print($record['id'])?></td>
-    <td><a href=<?php print("http://mysite.local/managers/page?id=".$record['id'])?>><?php print($record['full_name'])?></a></td>
+    <td><a href=<?php print("/managers/page?id=".$record['id'])?>><?php print($record['full_name'])?></a></td>
   </tr>
   <?php endforeach; ?>
 </table>
