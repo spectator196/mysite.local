@@ -25,6 +25,6 @@ $data_list=get_db_specific_managers($manager_id);
     </tr>
   <?php endforeach; ?>
 </table>
-<p><a href="/managers/">← Назад</a></p>
+<p><a href="/managers">← Назад</a></p>
 </html>
 

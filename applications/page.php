@@ -25,5 +25,5 @@ $data_list=get_db_specific_application($id);
     </tr>
   <?php endforeach; ?>
 </table>
-<p><a href="/applications/">← Назад</a></p>
+<p><a href="/applications">← Назад</a></p>
 </html>

@@ -8,7 +8,7 @@ function get_mysql_data($sql_request): object
     if ($mysql_link == false) {
         throw new \Exception("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
     }
-    
+
     $result = mysqli_query($mysql_link, $sql_request);
 
     if ($result == false) {
@@ -122,6 +122,34 @@ function get_db_specific_application($id): array
             'val' => '+7' . $data_list['phone_number']
         ]
     ];
+
+    return $result_array;
+}
+
+function get_db_filtered_table_applications($sql_array): array
+{
+    $sql_array = array_filter($sql_array);
+    if (count($sql_array) == 2) {
+        $sql_request =
+            'SELECT id, full_name FROM applications WHERE id=' . $sql_array['id'] .
+            ' AND full_name=' . $sql_array['full_name'];
+    } elseif (count($sql_array) == 1) {
+        switch (key($sql_array)) {
+            case 'id':
+                $sql_request = 'SELECT id, full_name FROM applications WHERE id=' . $sql_array['id'];
+                break;
+            case 'full_name':
+                $sql_request = "SELECT id, full_name FROM applications WHERE full_name='" . $sql_array['full_name'] . "'";
+                break;
+        }
+    }
+
+    $result = get_mysql_data($sql_request);
+
+    $result_array = [];
+    while ($row = mysqli_fetch_array($result)) {
+        $result_array[] = $row;
+    }
 
     return $result_array;
 }
