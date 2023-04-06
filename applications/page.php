@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include dirname(__DIR__, 1) . '\get_db_info.php';
+include dirname(__DIR__, 1) . '\config.php';
 
 $id=($_GET["id"]);
 $data_list=get_db_specific_application($id);
@@ -24,4 +25,5 @@ $data_list=get_db_specific_application($id);
     </tr>
   <?php endforeach; ?>
 </table>
+<p><a href="/applications/">← Назад</a></p>
 </html>
