@@ -6,13 +6,7 @@ error_reporting(E_ALL);
 include dirname(__DIR__, 1) . '\get_db_info.php';
 include dirname(__DIR__, 1) . '\config.php';
 
-$get_data = $_GET;
-
-if ($get_data == ['id' => '', 'full_name' => ''] or $get_data == []) {
-  $data_list = get_db_full_table_applications();
-} else {
-  $data_list = get_db_filtered_table_applications($get_data);
-}
+$data_list = get_db_full_table_applications($_GET);
 
 ?>
 

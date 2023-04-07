@@ -18,9 +18,19 @@ function get_mysql_data($sql_request): object
     return $result;
 }
 
-function get_db_full_table_applications(): array
+function get_db_full_table_applications($sql_data): array
 {
-    $sql_request = 'SELECT id, full_name FROM applications';
+    $sql_data = array_filter($sql_data);
+
+    $extra_sql_request = '';
+
+    if (array_key_exists('id', $sql_data)) {
+        $extra_sql_request .= ' AND id=' . $sql_data['id'];
+    } elseif (array_key_exists('full_name', $sql_data)) {
+        $extra_sql_request .= ' AND (full_name="' . $sql_data['full_name'] . '" OR full_name LIKE "%'.$sql_data['full_name'].'%")';
+    }
+
+    $sql_request = 'SELECT id, full_name FROM applications WHERE 1=1' . $extra_sql_request;
     $result = get_mysql_data($sql_request);
 
     $result_array = [];
@@ -31,7 +41,7 @@ function get_db_full_table_applications(): array
     return $result_array;
 }
 
-function get_db_full_table_managers(): array
+function get_db_full_table_managers($get_data): array
 {
     $sql_request = 'SELECT manager_id, full_name FROM managers';
     $result = get_mysql_data($sql_request);
