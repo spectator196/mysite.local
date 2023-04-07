@@ -132,14 +132,15 @@ function get_db_filtered_table_applications($sql_array): array
     if (count($sql_array) == 2) {
         $sql_request =
             'SELECT id, full_name FROM applications WHERE id=' . $sql_array['id'] .
-            ' AND full_name=' . $sql_array['full_name'];
+            ' AND (full_name=' . $sql_array['full_name'] . 'OR full_name LIKE "%' . $sql_array['full_name'] . '%"';
     } elseif (count($sql_array) == 1) {
         switch (key($sql_array)) {
             case 'id':
                 $sql_request = 'SELECT id, full_name FROM applications WHERE id=' . $sql_array['id'];
                 break;
             case 'full_name':
-                $sql_request = "SELECT id, full_name FROM applications WHERE full_name='" . $sql_array['full_name'] . "'";
+                $sql_request = "SELECT id, full_name FROM applications WHERE full_name='" . $sql_array['full_name'] .
+                    "' OR full_name LIKE '%" . $sql_array['full_name'] . "%'";
                 break;
         }
     }
