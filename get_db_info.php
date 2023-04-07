@@ -20,17 +20,15 @@ function get_mysql_data($sql_request): object
 
 function get_db_full_table_applications($sql_data): array
 {
-    $sql_data = array_filter($sql_data);
+    $sql_request = 'SELECT id, full_name FROM applications WHERE 1=1';
 
-    $extra_sql_request = '';
-
-    if (array_key_exists('id', $sql_data)) {
-        $extra_sql_request .= ' AND id=' . $sql_data['id'];
-    } elseif (array_key_exists('full_name', $sql_data)) {
-        $extra_sql_request .= ' AND (full_name="' . $sql_data['full_name'] . '" OR full_name LIKE "%'.$sql_data['full_name'].'%")';
-    }
-
-    $sql_request = 'SELECT id, full_name FROM applications WHERE 1=1' . $extra_sql_request;
+        if (!empty($sql_data['id'])) {
+            $sql_request .= ' AND id=' . $sql_data['id'];
+        } 
+        if (!empty($sql_data['full_name'])) {
+            $sql_request .= ' AND full_name LIKE "%'.$sql_data['full_name'].'%"';
+        }
+    
     $result = get_mysql_data($sql_request);
 
     $result_array = [];
@@ -41,9 +39,17 @@ function get_db_full_table_applications($sql_data): array
     return $result_array;
 }
 
-function get_db_full_table_managers($get_data): array
+function get_db_full_table_managers($sql_data): array
 {
-    $sql_request = 'SELECT manager_id, full_name FROM managers';
+    $sql_request = 'SELECT manager_id, full_name FROM managers WHERE 1=1';
+
+        if (!empty($sql_data['manager_id'])) {
+            $sql_request .= ' AND manager_id=' . $sql_data['manager_id'];
+        } 
+        if (!empty($sql_data['full_name'])) {
+            $sql_request .= ' AND full_name LIKE "%'.$sql_data['full_name'].'%"';
+        }
+    
     $result = get_mysql_data($sql_request);
 
     $result_array = [];

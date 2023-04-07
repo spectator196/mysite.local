@@ -11,8 +11,8 @@ $data_list = get_db_full_table_applications($_GET);
 ?>
 
 <html>
-
 <h1>Список заявок</h1>
+
 <div>
   <form name="filter">
     <p><b>ID: </b><input type="text" name='id' size="20"></p>
@@ -36,5 +36,4 @@ $data_list = get_db_full_table_applications($_GET);
   <?php endforeach; ?>
 </table>
 <p><a href='/'>← Назад</a></p>
-
 </html>
