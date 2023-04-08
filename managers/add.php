@@ -13,6 +13,11 @@ if (!empty($_POST)){
 ?>
 
 <html>
+
+<?php if (!empty($_POST)) : ?>
+    <meta http-equiv="refresh" content="0;/managers"/>
+<?php endif; ?>
+
 <form method="post">
     <table border="1">
         <caption>

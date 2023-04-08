@@ -194,3 +194,10 @@ function add_db_manager_data($new_data){
  
     get_mysql_data($sql_request);
 }   
+
+function delete_db_manager_data($data){
+
+    $sql_request='DELETE FROM managers WHERE manager_id ='.$data['manager_id'];
+
+    get_mysql_data($sql_request);
+}

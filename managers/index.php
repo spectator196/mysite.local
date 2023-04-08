@@ -6,6 +6,10 @@ error_reporting(E_ALL);
 include dirname(__DIR__, 1) . '\get_db_info.php';
 include dirname(__DIR__, 1) . '\config.php';
 
+if (!empty($_POST)){
+  delete_db_manager_data($_POST);
+}
+
 $data_list = get_db_full_table_managers($_GET);
 
 ?>
@@ -25,6 +29,7 @@ $data_list = get_db_full_table_managers($_GET);
   <tr>
     <th>ID менеджера</th>
     <th>ФИО менеджера</th>
+    <th>Действия</th>
   </tr>
   <?php foreach ($data_list as $record): ?>
     <tr>
@@ -32,6 +37,12 @@ $data_list = get_db_full_table_managers($_GET);
         <?php print($record['manager_id']) ?>
       </td>
       <td><a href="/managers/page.php?manager_id=<?php print($record['manager_id']) ?>"><?php print($record['full_name']) ?></a></td>
+      <td>
+        <form method="post">
+          <input type="hidden" name='manager_id' value="<?php print($record['manager_id']) ?>">
+          <p><input type="submit" value="Удалить"></p>
+        </form>
+      </td>
     </tr>
   <?php endforeach; ?>
 </table>
