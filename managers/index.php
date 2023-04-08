@@ -35,6 +35,7 @@ $data_list = get_db_full_table_managers($_GET);
     </tr>
   <?php endforeach; ?>
 </table>
+<p><a href='/managers/add.php'>+ Добавить менеджера</a></p>
 <p><a href='/'>← Назад</a></p>
 
 </html>

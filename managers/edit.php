@@ -17,9 +17,9 @@ $data_list = get_db_specific_managers($manager_id);
 
 <html>
 
-<!--<head>
-<meta http-equiv="refresh" content="0;URL=http://site.ru" />
-</head>-->
+<?php if (!empty($_POST)) : ?>
+    <meta http-equiv="refresh" content="0;/managers"/>
+<?php endif; ?>
 
 <form method="post">
     <table border="1">
@@ -46,7 +46,7 @@ $data_list = get_db_specific_managers($manager_id);
         <tr>
             <td><?php print($data_list['phone_number']['col']) ?></td>
             <td><?php print($data_list['phone_number']['val']) ?></td>
-            <td>+7<input name='phone_number' type="text" required size="40" maxlength="10" value='<?php print(mb_substr($data_list['phone_number']['val'],2)) ?>'></td>            
+            <td>+7<input name='phone_number' type="text" required size="37" maxlength="10" value='<?php print(mb_substr($data_list['phone_number']['val'],2)) ?>'></td>            
         </tr>
     </table>
     <p><input type="submit" value="Изменить данные"></p>

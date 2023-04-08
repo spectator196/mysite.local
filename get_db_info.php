@@ -187,3 +187,10 @@ function edit_db_manager_data($update_params)
     get_mysql_data($sql_request);
 
 }
+
+function add_db_manager_data($new_data){
+    $sql_request= "INSERT INTO managers (full_name, email, phone_number)" .
+    "VALUES ('" . $new_data['full_name'] . "','" . $new_data['email'] . "','" . $new_data['phone_number'] . "')";
+ 
+    get_mysql_data($sql_request);
+}   
