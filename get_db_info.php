@@ -2,7 +2,7 @@
 
 include 'config.php';
 
-function get_mysql_data($sql_request): object
+function get_mysql_data($sql_request)
 {
     $mysql_link = new mysqli('127.0.0.1', 'root', '', 'db_mysite.local');
     if ($mysql_link == false) {
@@ -22,13 +22,13 @@ function get_db_full_table_applications($params): array
 {
     $sql_request = 'SELECT id, full_name FROM applications WHERE 1=1';
 
-        if (!empty($params['id'])) {
-            $sql_request .= ' AND id=' . $params['id'];
-        } 
-        if (!empty($params['full_name'])) {
-            $sql_request .= ' AND full_name LIKE "%'.$params['full_name'].'%"';
-        }
-    
+    if (!empty($params['id'])) {
+        $sql_request .= ' AND id=' . $params['id'];
+    }
+    if (!empty($params['full_name'])) {
+        $sql_request .= ' AND full_name LIKE "%' . $params['full_name'] . '%"';
+    }
+
     $result = get_mysql_data($sql_request);
 
     $result_array = [];
@@ -43,13 +43,13 @@ function get_db_full_table_managers($params): array
 {
     $sql_request = 'SELECT manager_id, full_name FROM managers WHERE 1=1';
 
-        if (!empty($params['manager_id'])) {
-            $sql_request .= ' AND manager_id=' . $params['manager_id'];
-        } 
-        if (!empty($params['full_name'])) {
-            $sql_request .= ' AND full_name LIKE "%'.$params['full_name'].'%"';
-        }
-    
+    if (!empty($params['manager_id'])) {
+        $sql_request .= ' AND manager_id=' . $params['manager_id'];
+    }
+    if (!empty($params['full_name'])) {
+        $sql_request .= ' AND full_name LIKE "%' . $params['full_name'] . '%"';
+    }
+
     $result = get_mysql_data($sql_request);
 
     $result_array = [];
@@ -169,4 +169,21 @@ function get_db_filtered_table_applications($sql_array): array
     }
 
     return $result_array;
+}
+
+function edit_db_manager_data($update_params)
+{
+    $sql_request_1_part = 'UPDATE managers SET ';
+    $sql_request_2_part = '';
+    $sql_request_3_part = ' WHERE manager_id=' . $update_params['manager_id'];
+
+    unset($update_params['manager_id']);
+    foreach ($update_params as $key => $data) {
+        $sql_request_2_part .= $key . '= "'. $data . '", ';
+    }
+    $sql_request_2_part=substr($sql_request_2_part,0,-2) . ' ';
+    $sql_request = $sql_request_1_part . $sql_request_2_part . $sql_request_3_part;
+    
+    get_mysql_data($sql_request);
+
 }

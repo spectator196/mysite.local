@@ -6,35 +6,48 @@ error_reporting(E_ALL);
 include dirname(__DIR__, 1) . '\get_db_info.php';
 include dirname(__DIR__, 1) . '\config.php';
 
+if (!empty($_POST)){
+    edit_db_manager_data($_POST);
+}
+
 $manager_id = ($_GET["manager_id"]);
 $data_list = get_db_specific_managers($manager_id);
 
 ?>
 
 <html>
+
+<!--<head>
+<meta http-equiv="refresh" content="0;URL=http://site.ru" />
+</head>-->
+
 <form method="post">
     <table border="1">
         <caption>
-            <h1>Информация о менеджере</h1>
+            <h1>Редактирование данных менеджера №<?php print $data_list['manager_id']['val']?></h1>
         </caption>
+
+        <input name='manager_id' input type='hidden' value="<?php print $data_list['manager_id']['val']?>">
         <tr>
             <th>Атрибут</th>
             <th>Текущее значение</th>
             <th>Новое значение</th>
         </tr>
-        <?php foreach ($data_list as $record => $info_array): ?>
-            <tr>
-                <td>
-                    <?php print($info_array['col']) ?>
-                </td>
-                <td>
-                    <?php print($info_array['val']) ?>
-                </td>
-                <td>
-                    <input name='<?php print($record) ?>' input type="text" size="20">
-                </td>
-            </tr>
-        <?php endforeach; ?>
+        <tr>
+            <td><?php print($data_list['full_name']['col']) ?></td>
+            <td><?php print($data_list['full_name']['val']) ?></td>
+            <td><input name='full_name' type="text" required size="40" value= '<?php print($data_list['full_name']['val']) ?>'></td>            
+        </tr>
+        <tr>
+            <td><?php print($data_list['email']['col']) ?></td>
+            <td><?php print($data_list['email']['val']) ?></td>
+            <td><input name='email' type="text" required size="40" value='<?php print($data_list['email']['val']) ?>'></td>            
+        </tr>
+        <tr>
+            <td><?php print($data_list['phone_number']['col']) ?></td>
+            <td><?php print($data_list['phone_number']['val']) ?></td>
+            <td>+7<input name='phone_number' type="text" required size="40" maxlength="10" value='<?php print(mb_substr($data_list['phone_number']['val'],2)) ?>'></td>            
+        </tr>
     </table>
     <p><input type="submit" value="Изменить данные"></p>
 </form>
