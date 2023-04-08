@@ -17,7 +17,7 @@ $data_list = get_db_full_table_applications($_GET);
   <form name="filter">
     <p><b>ID: </b><input type="text" name='id' size="20"></p>
     <p><b>ФИО: </b><input type="text" name='full_name' size="20"></p>
-    <button type="submit">Фильтровать</button>
+    <button>Фильтровать</button>
   </form>
 </div>
 

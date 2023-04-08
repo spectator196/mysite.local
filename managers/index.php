@@ -11,13 +11,13 @@ $data_list = get_db_full_table_managers($_GET);
 ?>
 
 <html>
-<h1>Список заявок</h1>
+<h1>Список менеджеров</h1>
 
 <div>
   <form name="filter">
     <p><b>ID: </b><input type="text" name='manager_id' size="20"></p>
     <p><b>ФИО: </b><input type="text" name='full_name' size="20"></p>
-    <button type="submit">Фильтровать</button>
+    <button>Фильтровать</button>
   </form>
 </div>
 

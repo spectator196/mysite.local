@@ -18,15 +18,15 @@ function get_mysql_data($sql_request): object
     return $result;
 }
 
-function get_db_full_table_applications($sql_data): array
+function get_db_full_table_applications($params): array
 {
     $sql_request = 'SELECT id, full_name FROM applications WHERE 1=1';
 
-        if (!empty($sql_data['id'])) {
-            $sql_request .= ' AND id=' . $sql_data['id'];
+        if (!empty($params['id'])) {
+            $sql_request .= ' AND id=' . $params['id'];
         } 
-        if (!empty($sql_data['full_name'])) {
-            $sql_request .= ' AND full_name LIKE "%'.$sql_data['full_name'].'%"';
+        if (!empty($params['full_name'])) {
+            $sql_request .= ' AND full_name LIKE "%'.$params['full_name'].'%"';
         }
     
     $result = get_mysql_data($sql_request);
@@ -39,15 +39,15 @@ function get_db_full_table_applications($sql_data): array
     return $result_array;
 }
 
-function get_db_full_table_managers($sql_data): array
+function get_db_full_table_managers($params): array
 {
     $sql_request = 'SELECT manager_id, full_name FROM managers WHERE 1=1';
 
-        if (!empty($sql_data['manager_id'])) {
-            $sql_request .= ' AND manager_id=' . $sql_data['manager_id'];
+        if (!empty($params['manager_id'])) {
+            $sql_request .= ' AND manager_id=' . $params['manager_id'];
         } 
-        if (!empty($sql_data['full_name'])) {
-            $sql_request .= ' AND full_name LIKE "%'.$sql_data['full_name'].'%"';
+        if (!empty($params['full_name'])) {
+            $sql_request .= ' AND full_name LIKE "%'.$params['full_name'].'%"';
         }
     
     $result = get_mysql_data($sql_request);
