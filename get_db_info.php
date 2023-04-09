@@ -171,7 +171,7 @@ function get_db_filtered_table_applications($sql_array): array
     return $result_array;
 }
 
-function edit_db_manager_data($update_params)
+function edit_db_manager_data($update_params): void
 {
     $sql_request_1_part = 'UPDATE managers SET ';
     $sql_request_2_part = '';
@@ -179,25 +179,25 @@ function edit_db_manager_data($update_params)
 
     unset($update_params['manager_id']);
     foreach ($update_params as $key => $data) {
-        $sql_request_2_part .= $key . '= "'. $data . '", ';
+        $sql_request_2_part .= $key . '= "' . $data . '", ';
     }
-    $sql_request_2_part=substr($sql_request_2_part,0,-2) . ' ';
+    $sql_request_2_part = substr($sql_request_2_part, 0, -2) . ' ';
     $sql_request = $sql_request_1_part . $sql_request_2_part . $sql_request_3_part;
-    
+
     get_mysql_data($sql_request);
 
 }
 
-function add_db_manager_data($new_data){
-    $sql_request= "INSERT INTO managers (full_name, email, phone_number)" .
-    "VALUES ('" . $new_data['full_name'] . "','" . $new_data['email'] . "','" . $new_data['phone_number'] . "')";
- 
+function add_db_manager_data($new_data): void
+{
+    $sql_request = "INSERT INTO managers (full_name, email, phone_number)" .
+        "VALUES ('" . $new_data['full_name'] . "','" . $new_data['email'] . "','" . $new_data['phone_number'] . "')";
+
     get_mysql_data($sql_request);
-}   
+}
 
-function delete_db_manager_data($data){
-
-    $sql_request='DELETE FROM managers WHERE manager_id ='.$data['manager_id'];
-
+function delete_db_manager_data($data): void
+{
+    $sql_request = 'DELETE FROM managers WHERE manager_id =' . $data['manager_id'];
     get_mysql_data($sql_request);
 }

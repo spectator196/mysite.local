@@ -12,27 +12,33 @@ $data_list = get_db_specific_managers($manager_id);
 ?>
 
 <html>
-<table border="1">
-  <caption>
+
+<head>
+  <title>Информация о менеджере</title>
+</head>
+
+<body>
+  <table border="1">
     <h1>Информация о менеджере</h1>
-  </caption>
-  <tr>
-    <th>Атрибут</th>
-    <th>Значение</th>
-  </tr>
-  <?php foreach ($data_list as $record): ?>
     <tr>
-      <td>
-        <?php print($record['col']) ?>
-      </td>
-      <td>
-        <?php print($record['val']) ?>
-      </td>
+      <th>Атрибут</th>
+      <th>Значение</th>
     </tr>
-  <?php endforeach; ?>
-</table>
-<div>
-  <a href="/managers/edit.php?manager_id=<?php print($data_list['manager_id']['val']) ?>">Редактировать запись</a>
-</div>
-<p><a href="/managers">← Назад</a></p>
+    <?php foreach ($data_list as $record): ?>
+      <tr>
+        <td>
+          <?php print($record['col']) ?>
+        </td>
+        <td>
+          <?php print($record['val']) ?>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+  <div>
+    <a href="/managers/edit.php?manager_id=<?php print($data_list['manager_id']['val']) ?>">Редактировать запись</a>
+  </div>
+  <p><a href="/managers">← Назад</a></p>
+</body>
+
 </html>
