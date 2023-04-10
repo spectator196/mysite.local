@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 include dirname(__DIR__, 1) . '\get_db_info.php';
 include dirname(__DIR__, 1) . '\config.php';
 
-$id=($_GET["id"]);
-$data_list=get_db_specific_application($id);
+$id = ($_GET["id"]);
+$data_list = get_db_specific_application($id);
 
 ?>
 
@@ -18,8 +18,8 @@ $data_list=get_db_specific_application($id);
 </head>
 
 <body>
+  <h1>Информация о заявке</h1>
   <table border="1">
-    <h1>Информация о заявке</h1>
     <tr>
       <th>Атрибут</th>
       <th>Значение</th>

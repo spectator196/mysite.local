@@ -146,35 +146,6 @@ function get_db_specific_application($id): array
     return $result_array;
 }
 
-function get_db_filtered_table_applications($sql_array): array
-{
-    $sql_array = array_filter($sql_array);
-    if (count($sql_array) == 2) {
-        $sql_request =
-            'SELECT id, full_name FROM applications WHERE id=' . $sql_array['id'] .
-            ' AND (full_name=' . $sql_array['full_name'] . 'OR full_name LIKE "%' . $sql_array['full_name'] . '%"';
-    } elseif (count($sql_array) == 1) {
-        switch (key($sql_array)) {
-            case 'id':
-                $sql_request = 'SELECT id, full_name FROM applications WHERE id=' . $sql_array['id'];
-                break;
-            case 'full_name':
-                $sql_request = "SELECT id, full_name FROM applications WHERE full_name='" . $sql_array['full_name'] .
-                    "' OR full_name LIKE '%" . $sql_array['full_name'] . "%'";
-                break;
-        }
-    }
-
-    $result = get_mysql_data($sql_request);
-
-    $result_array = [];
-    while ($row = mysqli_fetch_array($result)) {
-        $result_array[] = $row;
-    }
-
-    return $result_array;
-}
-
 function edit_db_manager_data($update_params): void
 {
     $sql_request_1_part = 'UPDATE managers SET ';
@@ -219,8 +190,6 @@ function edit_db_application_data($update_params): void
     $sql_request_2_part = substr($sql_request_2_part, 0, -2) . ' ';
     $sql_request = $sql_request_1_part . $sql_request_2_part . $sql_request_3_part;
 
-    print $sql_request;
-
     get_mysql_data($sql_request);
 
 }
@@ -229,12 +198,12 @@ function add_db_application_data($new_data): void
 {
     $sql_request = "INSERT INTO applications (full_name, b_day, reg_form, sex, email, phone_number, manager_id)" .
         "VALUES ('" . $new_data['full_name'] .
-         "', '" . $new_data['b_day'] . 
-         "', '" . $new_data['reg_form'] .
-         "', '" . $new_data['sex'] .
-         "', '" . $new_data['email'] .
-         "', '" . $new_data['phone_number'] . 
-         "', '" . $new_data['manager_id'] . "')";
+        "', '" . $new_data['b_day'] .
+        "', '" . $new_data['reg_form'] .
+        "', '" . $new_data['sex'] .
+        "', '" . $new_data['email'] .
+        "', '" . $new_data['phone_number'] .
+        "', '" . $new_data['manager_id'] . "')";
 
     get_mysql_data($sql_request);
 }

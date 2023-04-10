@@ -18,8 +18,8 @@ $data_list = get_db_specific_managers($manager_id);
 </head>
 
 <body>
+  <h1>Информация о менеджере</h1>
   <table border="1">
-    <h1>Информация о менеджере</h1>
     <tr>
       <th>Атрибут</th>
       <th>Значение</th>

@@ -19,9 +19,10 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <h1>Добавление новой заявки</h1>
     <form method="post">
         <table border="1">
-            <h1>Добавление новой заявки</h1>
+
 
             <input name='id' input type='hidden' value="<?php print $data_list['id']['val'] ?>">
             <tr>

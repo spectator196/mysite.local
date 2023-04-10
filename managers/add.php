@@ -19,9 +19,10 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <h1>Добавление записи менеджера</h1>
     <form method="post">
         <table border="1">
-            <h1>Добавление записи менеджера</h1>
+
 
             <input name='manager_id' input type='hidden' value="<?php print $data_list['manager_id']['val'] ?>">
             <tr>

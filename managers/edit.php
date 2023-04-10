@@ -22,13 +22,12 @@ $data_list = get_db_specific_managers($manager_id);
 </head>
 
 <body>
+    <h1>Редактирование данных менеджера №
+        <?php print $data_list['manager_id']['val'] ?>
+    </h1>
+
     <form method="post">
         <table border="1">
-            <caption>
-                <h1>Редактирование данных менеджера №
-                    <?php print $data_list['manager_id']['val'] ?>
-                </h1>
-            </caption>
 
             <input name='manager_id' input type='hidden' value="<?php print $data_list['manager_id']['val'] ?>">
             <tr>
@@ -71,4 +70,5 @@ $data_list = get_db_specific_managers($manager_id);
     </form>
     <p><a href="/managers">← Назад</a></p>
 </body>
+
 </html>
