@@ -136,6 +136,10 @@ function get_db_specific_application($id): array
         'phone_number' => [
             'col' => 'Номер телефона',
             'val' => '+7' . $data_list['phone_number']
+        ],
+        'manager_id' => [
+            'col' => 'ID ответственного менеджера',
+            'val' => $data_list['manager_id']
         ]
     ];
 
@@ -199,5 +203,44 @@ function add_db_manager_data($new_data): void
 function delete_db_manager_data($data): void
 {
     $sql_request = 'DELETE FROM managers WHERE manager_id =' . $data['manager_id'];
+    get_mysql_data($sql_request);
+}
+
+function edit_db_application_data($update_params): void
+{
+    $sql_request_1_part = 'UPDATE applications SET ';
+    $sql_request_2_part = '';
+    $sql_request_3_part = ' WHERE id=' . $update_params['id'];
+
+    unset($update_params['id']);
+    foreach ($update_params as $key => $data) {
+        $sql_request_2_part .= $key . '= "' . $data . '", ';
+    }
+    $sql_request_2_part = substr($sql_request_2_part, 0, -2) . ' ';
+    $sql_request = $sql_request_1_part . $sql_request_2_part . $sql_request_3_part;
+
+    print $sql_request;
+
+    get_mysql_data($sql_request);
+
+}
+
+function add_db_application_data($new_data): void
+{
+    $sql_request = "INSERT INTO applications (full_name, b_day, reg_form, sex, email, phone_number, manager_id)" .
+        "VALUES ('" . $new_data['full_name'] .
+         "', '" . $new_data['b_day'] . 
+         "', '" . $new_data['reg_form'] .
+         "', '" . $new_data['sex'] .
+         "', '" . $new_data['email'] .
+         "', '" . $new_data['phone_number'] . 
+         "', '" . $new_data['manager_id'] . "')";
+
+    get_mysql_data($sql_request);
+}
+
+function delete_db_application_data($data): void
+{
+    $sql_request = 'DELETE FROM applications WHERE id =' . $data['id'];
     get_mysql_data($sql_request);
 }
