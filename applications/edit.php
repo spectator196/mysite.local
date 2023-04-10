@@ -22,13 +22,12 @@ $data_list = get_db_specific_application($manager_id);
 </head>
 
 <body>
+    <h1>Редактирование данных заявки №
+        <?php print $data_list['id']['val'] ?>
+    </h1>
     <form method="post">
         <table border="1">
-            <caption>
-                <h1>Редактирование данных заявки №
-                    <?php print $data_list['id']['val'] ?>
-                </h1>
-            </caption>
+
 
             <input name='id' input type='hidden' value="<?php print $data_list['id']['val'] ?>">
             <tr>
@@ -111,4 +110,5 @@ $data_list = get_db_specific_application($manager_id);
     </form>
     <p><a href="/applications">← Назад</a></p>
 </body>
+
 </html>
