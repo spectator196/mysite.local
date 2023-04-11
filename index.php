@@ -5,7 +5,11 @@
  </head>
  <body>
   <h3>Главная страница mysite.local</h3>
-  <p><a href="http://mysite.local/applications/">• Заявки.</a></p>
-  <p><a href="http://mysite.local/managers/">• Менеджеры.</a></p>
+  <ul>
+    <li><a href="/applications/">Заявки.</a></li>
+    <li><a href="/managers/">Менеджеры.</a></li>
+  </ul>
  </body>
 </html>
+
+
