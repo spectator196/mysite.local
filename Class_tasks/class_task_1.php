@@ -1,11 +1,11 @@
 <?php
 
-class Animal
+class аnimal
 {
     public string $type;
     public string $feedObj;
 
-    public function show_my_animal(): string
+    public function showMyAnimal(): string
     {
         if (isset($this->type)) {
             if (isset($this->feedObj)) {
@@ -19,21 +19,21 @@ class Animal
     }
 }
 
-$animal_1 = new Animal;
-$animal_1->type = 'Кошка';
-$animal_1->feedObj = 'Рыба';
+$animal1 = new аnimal;
+$animal1->type = 'Кошка';
+$animal1->feedObj = 'Рыба';
 
-$animal_2 = new Animal;
-$animal_2->type = 'Зебра';
+$animal2 = new аnimal;
+$animal2->type = 'Зебра';
 
-$animal_3 = new Animal;
-$animal_3->type = 123;
-$animal_3->feedObj = 'Мыло';
+$animal3 = new аnimal;
+$animal3->type = 123;
+$animal3->feedObj = 'Мыло';
 
-$animal_4 = new Animal;
-$animal_4->feedObj = 'Резина';
+$animal4 = new аnimal;
+$animal4->feedObj = 'Резина';
 
-echo $animal_1->show_my_animal(); // Животное: Кошка Лакомство: Рыба
-echo $animal_2->show_my_animal(); // Дикое животное
-echo $animal_3->show_my_animal(); // Животное: 123 Лакомство: Мыло (123=>'123')
-echo $animal_4->show_my_animal(); // Не указаны данные о животном!
+print $animal1->showMyAnimal(); // Животное: Кошка Лакомство: Рыба
+print $animal2->showMyAnimal(); // Дикое животное
+print $animal3->showMyAnimal(); // Животное: 123 Лакомство: Мыло (123=>'123')
+print $animal4->showMyAnimal(); // Не указаны данные о животном!
