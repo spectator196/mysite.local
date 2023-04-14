@@ -1,6 +1,6 @@
 <?php
 
-class squareChecker
+class SquareChecker
 {
 
     public array $partList;
@@ -31,26 +31,25 @@ class squareChecker
     }
 }
 
-$figure1 = new squareChecker;
+$figure1 = new SquareChecker;
 $figure1->partList = [20, 20, 20, 20];
-
-$figure2 = new squareChecker;
-
-$figure3 = new squareChecker;
-$figure3->partList = [20, 20, 20];
-
-$figure4 = new squareChecker;
-$figure4->partList = [20, 'Двадцать', 20, 20];
-
-$figure5 = new squareChecker;
-$figure5->partList = [20, 20, 20, -20];
-
-$figure6 = new squareChecker;
-$figure6->partList = [20, 20, 30, 20];
-
 print $figure1->is_square(); // Квадрат
+
+$figure2 = new SquareChecker;
 print $figure2->is_square(); // 'Не указан массив со сторонами'
+
+$figure3 = new SquareChecker;
+$figure3->partList = [20, 20, 20];
 print $figure3->is_square(); // 'Не корректное кол-во элементов фигуры'
+
+$figure4 = new SquareChecker;
+$figure4->partList = [20, 'Двадцать', 20, 20];
 print $figure4->is_square(); // 'Нужно вводить только числа'
+
+$figure5 = new SquareChecker;
+$figure5->partList = [20, 20, 20, -20];
 print $figure5->is_square(); // 'Отрицательные числа неприемлемы'
+
+$figure6 = new SquareChecker;
+$figure6->partList = [20, 20, 30, 20];
 print $figure6->is_square(); // 'Стороны квадрата должны быть равными'

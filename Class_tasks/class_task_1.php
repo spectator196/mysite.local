@@ -1,6 +1,6 @@
 <?php
 
-class аnimal
+class Animal
 {
     public string $type;
     public string $feedObj;
@@ -19,21 +19,20 @@ class аnimal
     }
 }
 
-$animal1 = new аnimal;
+$animal1 = new Animal;
 $animal1->type = 'Кошка';
 $animal1->feedObj = 'Рыба';
+print $animal1->showMyAnimal(); // Животное: Кошка Лакомство: Рыба
 
-$animal2 = new аnimal;
+$animal2 = new Animal;
 $animal2->type = 'Зебра';
+print $animal2->showMyAnimal(); // Дикое животное
 
-$animal3 = new аnimal;
+$animal3 = new Animal;
 $animal3->type = 123;
 $animal3->feedObj = 'Мыло';
-
-$animal4 = new аnimal;
-$animal4->feedObj = 'Резина';
-
-print $animal1->showMyAnimal(); // Животное: Кошка Лакомство: Рыба
-print $animal2->showMyAnimal(); // Дикое животное
 print $animal3->showMyAnimal(); // Животное: 123 Лакомство: Мыло (123=>'123')
+
+$animal4 = new Animal;
+$animal4->feedObj = 'Резина';
 print $animal4->showMyAnimal(); // Не указаны данные о животном!
