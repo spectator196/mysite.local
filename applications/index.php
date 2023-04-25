@@ -3,8 +3,11 @@
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
+
 include dirname(__DIR__, 1) . '\get_db_info.php';
 include dirname(__DIR__, 1) . '\config.php';
+include dirname(__DIR__, 1) . '\api.php';
 
 if (!empty($_POST)) {
   delete_db_application_data($_POST);
@@ -13,11 +16,11 @@ if (!empty($_POST)) {
 $data_list = get_db_full_table_applications($_GET);
 
 ?>
-
 <html>
 
 <head>
   <title>Список заявок</title>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
 <body>
