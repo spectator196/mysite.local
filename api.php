@@ -1,58 +1,156 @@
-<?php 
-include 'get_db_info.php';
+<?php
 
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include_once 'get_db_info.php';
+header('Content-type: application/json');
 
 /* http://mysite.local/api.php?path=applications GET*/
+/* http://mysite.local/api.php?path=applications POST*/
+/* http://mysite.local/api.php?path=applications&id=% PUT*/
+/* http://mysite.local/api.php?path=applications&id=% DELETE*/
+/* http://mysite.local/api.php?path=applications&id=% GET*/
+
 /* http://mysite.local/api.php?path=managers GET*/
+/* http://mysite.local/api.php?path=managers POST*/
+/* http://mysite.local/api.php?path=managers&manager_id=% PUT*/
+/* http://mysite.local/api.php?path=managers&manager_id=% DELETE*/
+/* http://mysite.local/api.php?path=managers&manager_id=% GET*/
 
-if ($_GET['path']=='applications' and (isset($_GET['id'])))
+function applications_get_list(): array
 {
-    print(json_encode(get_db_full_table_applications(($_GET['id']))));
-} elseif ($_GET['path']=='applications')
-{
-    print(json_encode(get_db_full_table_applications([])));
+    return get_db_full_table_applications([]);
 }
 
-if ($_GET['path']=='managers' and (isset($_GET['manager_id'])))
+function applications_get_item($id): array
 {
-    print(json_encode(get_db_specific_managers(($_GET['manager_id']))));
-} elseif ($_GET['path']=='managers')
-{
-    print(json_encode(get_db_full_table_managers([])));
+    return get_db_specific_application($id);
 }
 
-/* http://mysite.local/api.php?path=applications/create POST*/
-/* http://mysite.local/api.php?path=managers/create POST*/
-
-if ($_POST['path']=='applications/create' and (isset($_POST['app_data'])))
+function application_post_create($app_data): array
 {
-    add_db_application_data($_POST['app_data']);
+    add_db_application_data($app_data);
+    return ['result' => 'ADD Done'];
 }
-if ($_POST['path']=='managers/create' and (isset($_POST['manager_data'])))
+
+function application_post_update($id, $app_data): array
 {
-    add_db_manager_data($_POST['manager_data']);
+    edit_db_application_data($id, $app_data);
+    return ['result' => 'EDIT Done'];
 }
 
-/* http://mysite.local/api.php?path=applications/delete POST ?DELETE*/
-/* http://mysite.local/api.php?path=managers/delete POST ?DELETE*/
-
-if ($_POST['path']=='applications/delete' and (isset($_POST['id'])))
+function application_post_delete($id): array
 {
-    delete_db_application_data($_POST['app_data']);
+    delete_db_application_data($id);
+    return ['result' => 'DELETE Done id'];
 }
-if ($_POST['path']=='managers/delete' and (isset($_POST['manager_id'])))
+
+function manager_get_list(): array
 {
-    delete_db_manager_data($_POST['manager_data']);
+    return get_db_full_table_managers([]);
 }
 
-/* http://mysite.local/api.php?path=applications/update POST ?PUT*/
-/* http://mysite.local/api.php?path=managers/update POST ?PUT*/
+function manager_get_item($manager_id): array
+{
+    return get_db_specific_managers($manager_id);
+}
 
-if ($_POST['path']=='applications/update' and (isset($_POST['app_data'])))
-{   
-    edit_db_application_data($_POST['app_data']);
+function manager_post_create($app_data): array
+{
+    add_db_manager_data($app_data);
+    return ['result' => 'ADD Done'];
 }
-if ($_POST['path']=='managers/update' and (isset($_POST['manager_data'])))
-{   
-    edit_db_application_data($_POST['manager_data']);
+function manager_post_update($manager_id, $app_data): array
+{
+    edit_db_manager_data($manager_id, $app_data);
+    return ['result' => 'EDIT Done'];
 }
+
+function manager_post_delete($manager_id): array
+{
+    delete_db_manager_data($manager_id);
+    return ['result' => 'DELETE Done'];
+}
+
+
+function api()
+{
+    $result = [1];
+    $path = $_GET['path'] ?? '';
+    switch ($_SERVER['REQUEST_METHOD']) {
+
+        case 'GET':
+            switch ($path) {
+                case 'applications':
+                    if (!empty($_GET['id'])) {
+                        $result = applications_get_item($_GET['id']);
+                    } else {
+                        $result = applications_get_list();
+                    }
+                    ;
+                    break;
+                case 'managers':
+                    if (!empty($_GET['manager_id'])) {
+                        $result = manager_get_item($_GET['manager_id']);
+                    } else {
+                        $result = manager_get_list();
+                    }
+                    break;
+            }
+            break;
+
+
+        case 'POST':
+            switch ($path) {
+                case 'applications':
+                    if (!empty($_POST)) {
+                        $result = application_post_create($_POST);
+                    }
+                    break;
+                case 'managers':
+                    if (!empty($_POST)) {
+                        $result = manager_post_create($_POST);
+                    }
+                    break;
+            }
+            break;
+
+
+        case 'PUT':
+            switch ($path) {
+                case 'applications':
+                    if (!empty($_GET['id']) and !empty($_POST)) {
+                        $result = application_post_update($_GET['id'], $_POST);
+                    }
+                    break;
+                case 'managers':
+                    if (!empty($_GET['manager_id']) and !empty($_POST)) {
+                        $result = manager_post_update($_GET['manager_id'], $_POST);
+                    }
+                    break;
+            }
+            break;
+
+
+        case 'DELETE':
+            switch ($path) {
+                case 'applications':
+                    if (!empty($_GET['id'])) {
+                        $result = application_post_delete($_GET['id']);
+                    }
+                    break;
+                case 'managers':
+                    if (!empty($_GET['manager_id'])) {
+                        $result = manager_post_delete($_GET['manager_id']);
+                    }
+                    break;
+            }
+            break;
+    }
+
+    print json_encode($result);
+}
+
+api();
+die();

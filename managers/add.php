@@ -16,6 +16,26 @@ if (!empty($_POST)) {
 
 <head>
     <title>Добавление записи менеджера</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+
+                $.ajax({
+                    url: '/api.php?path=managers',
+                    method: 'post',
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        }); 
+    </script>
 </head>
 
 <body>

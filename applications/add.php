@@ -15,7 +15,27 @@ if (!empty($_POST)) {
 <html>
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>Добавление новой заявки</title>
+
+    <script>
+        $(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+
+                $.ajax({
+                    url: '/api.php?path=applications',
+                    method: 'post',
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        }); 
+    </script>
 </head>
 
 <body>

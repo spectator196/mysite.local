@@ -13,14 +13,39 @@ if (!empty($_POST)) {
 $data_list = get_db_full_table_managers($_GET);
 
 ?>
-
 <html>
 
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <title>Список менеджеров</title>
 </head>
 
 <body>
+
+  <script>
+    $(function () {
+      $.ajax({
+        url: '/api.php?path=managers',
+        method: 'get',
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+          data.forEach(function (val) {
+            var table_data = '<tr><td>' + val.manager_id + '</td>' +
+
+              '<td><a href="/managers/page.php?manager_id=' + val.manager_id + '">' + val.full_name + '</a></td>' +
+
+              '<td><form method="post">' +
+              '<input type="hidden" name="manager_id" value="' + val.manager_id + '">' +
+              '<p><input type="submit" value="Удалить"></p>' +
+              '</form></td></tr>'
+            $('#result_table').append(table_data);
+          });
+        }
+      });
+    });
+  </script>
+
   <h1>Список менеджеров</h1>
 
   <div>
@@ -31,27 +56,14 @@ $data_list = get_db_full_table_managers($_GET);
     </form>
   </div>
 
-  <table border="1">
+  <table border="1" id='result_table'>
     <tr>
       <th>ID менеджера</th>
       <th>ФИО менеджера</th>
       <th>Действия</th>
     </tr>
-    <?php foreach ($data_list as $record): ?>
-      <tr>
-        <td>
-          <?php print($record['manager_id']) ?>
-        </td>
-        <td><a href="/managers/page.php?manager_id=<?php print($record['manager_id']) ?>"><?php print($record['full_name']) ?></a></td>
-        <td>
-          <form method="post">
-            <input type="hidden" name='manager_id' value="<?php print($record['manager_id']) ?>">
-            <p><input type="submit" value="Удалить"></p>
-          </form>
-        </td>
-      </tr>
-    <?php endforeach; ?>
   </table>
+
   <p><a href='/managers/add.php'>+ Добавить менеджера</a></p>
   <p><a href='/'>← Назад</a></p>
 </body>
