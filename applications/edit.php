@@ -7,7 +7,7 @@ include dirname(__DIR__, 1) . '\get_db_info.php';
 include dirname(__DIR__, 1) . '\config.php';
 
 if (!empty($_POST)) {
-    edit_db_application_data($_POST);
+    edit_db_application_data($_POST['id'],$_POST['update_params']);
 }
 
 $manager_id = ($_GET["id"]);
