@@ -172,7 +172,7 @@ function add_db_manager_data($new_data): void
 
 function delete_db_manager_data($data): void
 {
-    $sql_request = 'DELETE FROM managers WHERE manager_id =' . $data['manager_id'];
+    $sql_request = 'DELETE FROM managers WHERE manager_id =' . $data;
     get_mysql_data($sql_request);
 }
 
@@ -208,6 +208,6 @@ function add_db_application_data($new_data): void
 
 function delete_db_application_data($data): void
 {
-    $sql_request = 'DELETE FROM applications WHERE id =' . $data['id'];
+    $sql_request = 'DELETE FROM applications WHERE id =' . $data;
     get_mysql_data($sql_request);
 }

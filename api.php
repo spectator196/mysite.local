@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 include_once 'get_db_info.php';
 header('Content-type: application/json');
 
+
 /* http://mysite.local/api.php?path=applications GET*/
 /* http://mysite.local/api.php?path=applications POST*/
 /* http://mysite.local/api.php?path=applications&id=% PUT*/
@@ -43,7 +44,7 @@ function application_post_update($id, $app_data): array
 function application_post_delete($id): array
 {
     delete_db_application_data($id);
-    return ['result' => 'DELETE Done id'];
+    return ['result' => 'DELETE Done'];
 }
 
 function manager_get_list(): array
@@ -97,6 +98,9 @@ function api()
                         $result = manager_get_list();
                     }
                     break;
+                default:
+                    $result=('Некорректное обращение методом GET к api!');
+                    break;   
             }
             break;
 
@@ -113,6 +117,9 @@ function api()
                         $result = manager_post_create($_POST);
                     }
                     break;
+                default:
+                    $result=('Некорректное обращение методом POST к api!');
+                    break;    
             }
             break;
 
@@ -125,11 +132,16 @@ function api()
                     }
                     break;
                 case 'managers':
+                    print_r($_POST);
+                    die();
                     if (!empty($_GET['manager_id']) and !empty($_POST)) {
                         $result = manager_post_update($_GET['manager_id'], $_POST);
                     }
                     break;
-            }
+                default:
+                    $result=('Некорректное обращение методом PUT к api!');
+                    break;    
+            }   
             break;
 
 
@@ -145,7 +157,14 @@ function api()
                         $result = manager_post_delete($_GET['manager_id']);
                     }
                     break;
+                default:
+                    $result=('Некорректное обращение методом DELETE к api!');
+                    break;
             }
+            break;     
+        
+        default:
+            $result=('Некорректное обращение к api!');
             break;
     }
 
