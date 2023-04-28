@@ -17,6 +17,8 @@ if (!empty($_POST)) {
 <head>
     <title>Добавление записи менеджера</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <script>
         $(function () {
@@ -41,8 +43,7 @@ if (!empty($_POST)) {
 <body>
     <h1>Добавление записи менеджера</h1>
     <form method="post">
-        <table border="1">
-
+        <table class="table table-bordered table-striped">
 
             <input name='manager_id' input type='hidden' value="<?php print $data_list['manager_id']['val'] ?>">
             <tr>
@@ -62,7 +63,7 @@ if (!empty($_POST)) {
                 <td>+7<input name='phone_number' type="text" required size="37" maxlength="10"></td>
             </tr>
         </table>
-        <p><input type="submit" value="Добавить данные"></p>
+        <p><input type="submit" class="btn btn-primary" value="Добавить данные"></p>
     </form>
     <p><a href="/managers">← Назад</a></p>
 </body>
