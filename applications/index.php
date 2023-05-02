@@ -62,17 +62,21 @@ include dirname(__DIR__, 1) . '\config.php';
     <form name="filter">
       <p><b>ID: </b><input type="text" name='id' size="20"></p>
       <p><b>ФИО: </b><input type="text" name='full_name' size="20"></p>
-      <button class="btn btn-accept">Фильтровать</button>
+      <button class="btn btn-secondary">Фильтровать</button>
     </form>
   </div>
   <div class="container">
-    <table class="table table-bordered table-striped float-right" id='result_table'>
-      <tr>
-        <th>ID заявки</th>
-        <th>ФИО заявки</th>
-        <th>Действия</th>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col">
+        <table class="table table-bordered table-striped" id='result_table'>
+          <tr>
+            <th>ID заявки</th>
+            <th>ФИО заявки</th>
+            <th>Действия</th>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <p><a href='/applications/add.php'>+ Добавить заявку</a></p>
   <p><a href='/'>← Назад</a></p>

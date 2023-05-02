@@ -31,7 +31,6 @@ $data_list = get_db_full_table_managers($_GET);
         method: 'get',
         dataType: 'json',
         success: function (data) {
-          console.log(data);
           data.forEach(function (val) {
             var table_data = '<tr><td>' + val.manager_id + '</td>' +
               '<td><a href="/managers/page.php?manager_id=' + val.manager_id + '">' + val.full_name + '</a></td>' +
@@ -71,14 +70,19 @@ $data_list = get_db_full_table_managers($_GET);
       <button>Фильтровать</button>
     </form>
   </div>
-
-  <table class="table table-bordered table-striped float-right" id='result_table'>
-    <tr>
-      <th>ID менеджера</th>
-      <th>ФИО менеджера</th>
-      <th>Действия</th>
-    </tr>
-  </table>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table table-bordered table-striped" id='result_table'>
+          <tr>
+            <th>ID менеджера</th>
+            <th>ФИО менеджера</th>
+            <th>Действия</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <p><a href='/managers/add.php'>+ Добавить менеджера</a></p>
   <p><a href='/'>← Назад</a></p>

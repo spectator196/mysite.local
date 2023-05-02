@@ -38,7 +38,6 @@ $data_list = get_db_specific_application($manager_id);
                 method: 'get',
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
                     var table_data = '<tr><td>' + data.id.col + '</td>' +
                         '<td>' + data.id.val + '</td>' +
 

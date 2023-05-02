@@ -6,6 +6,13 @@ error_reporting(E_ALL);
 include_once 'get_db_info.php';
 header('Content-type: application/json');
 
+define ('ERROR_API_MESSAGES',[
+    'default_api_error'=> 'Некорректное обращение к api!',
+    'post_api_error'=>'Некорректное обращение методом POST к api!',
+    'get_api_error'=>'Некорректное обращение методом GET к api!',
+    'put_api_error'=>'Некорректное обращение методом PUT к api!',
+    'delete_api_error'=>'Некорректное обращение методом DELETE к api!'
+]);
 
 /* http://mysite.local/api.php?path=applications GET*/
 /* http://mysite.local/api.php?path=applications POST*/
@@ -99,7 +106,7 @@ function api()
                     }
                     break;
                 default:
-                    $result=('Некорректное обращение методом GET к api!');
+                    $result=ERROR_API_MESSAGES['get_api_error'];
                     break;   
             }
             break;
@@ -118,7 +125,7 @@ function api()
                     }
                     break;
                 default:
-                    $result=('Некорректное обращение методом POST к api!');
+                    $result=ERROR_API_MESSAGES['post_api_error'];
                     break;    
             }
             break;
@@ -132,14 +139,12 @@ function api()
                     }
                     break;
                 case 'managers':
-                    print_r($_POST);
-                    die();
                     if (!empty($_GET['manager_id']) and !empty($_POST)) {
                         $result = manager_post_update($_GET['manager_id'], $_POST);
                     }
                     break;
                 default:
-                    $result=('Некорректное обращение методом PUT к api!');
+                    $result=ERROR_API_MESSAGES['put_api_error'];
                     break;    
             }   
             break;
@@ -158,13 +163,13 @@ function api()
                     }
                     break;
                 default:
-                    $result=('Некорректное обращение методом DELETE к api!');
+                    $result=ERROR_API_MESSAGES['delete_api_error'];
                     break;
             }
             break;     
         
         default:
-            $result=('Некорректное обращение к api!');
+            $result=ERROR_API_MESSAGES['default_api_error'];
             break;
     }
 

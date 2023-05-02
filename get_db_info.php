@@ -206,8 +206,8 @@ function add_db_application_data($new_data): void
     get_mysql_data($sql_request);
 }
 
-function delete_db_application_data($data): void
+function delete_db_application_data($id): void
 {
-    $sql_request = 'DELETE FROM applications WHERE id =' . $data;
+    $sql_request = 'DELETE FROM applications WHERE id =' . $id;
     get_mysql_data($sql_request);
 }

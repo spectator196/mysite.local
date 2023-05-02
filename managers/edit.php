@@ -45,36 +45,34 @@ $data_list = get_db_specific_managers($manager_id);
                 });
             });
         }); 
-    </script>
 
-    <script>
-        $(function () {
-            var manager_id = $('h1').attr("data-manager_id")
-            $.ajax({
-                url: '/api.php?path=managers&manager_id=' + manager_id,
-                method: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    var result_table = '<tr><td>' + data.full_name.col + '</td>' +
-                        '<td>' + data.full_name.val + '</td>' +
-                        '<td><input name="full_name" type="text" required size="40"' +
-                        'value="' + data.full_name.val + '"></td></tr>' +
 
-                        '<tr><td>' + data.email.col + '</td>' +
-                        '<td>' + data.email.val + '</td>' +
-                        '<td><input name="email" type="text" required size="40"' +
-                        'value="' + data.email.val + '"></td></tr>' +
+        var manager_id = $('h1').attr("data-manager_id")
+        $.ajax({
+            url: '/api.php?path=managers&manager_id=' + manager_id,
+            method: 'get',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var result_table = '<tr><td>' + data.full_name.col + '</td>' +
+                    '<td>' + data.full_name.val + '</td>' +
+                    '<td><input name="full_name" type="text" required size="40"' +
+                    'value="' + data.full_name.val + '"></td></tr>' +
 
-                        '<tr><td>' + data.phone_number.col + '</td>' +
-                        '<td>' + data.phone_number.val + '</td>' +
-                        '<td><input name="phone_number" type="text" required size="37" maxlength="10"' +
-                        'value="' + data.phone_number.val.substr(2) + '"></td></tr>';
+                    '<tr><td>' + data.email.col + '</td>' +
+                    '<td>' + data.email.val + '</td>' +
+                    '<td><input name="email" type="text" required size="40"' +
+                    'value="' + data.email.val + '"></td></tr>' +
 
-                    $('#result_table').append(result_table);
-                }
-            });
+                    '<tr><td>' + data.phone_number.col + '</td>' +
+                    '<td>' + data.phone_number.val + '</td>' +
+                    '<td><input name="phone_number" type="text" required size="37" maxlength="10"' +
+                    'value="' + data.phone_number.val.substr(2) + '"></td></tr>';
+
+                $('#result_table').append(result_table);
+            }
         });
+
     </script>
 
     <form method="post">
