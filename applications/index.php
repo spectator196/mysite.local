@@ -26,33 +26,34 @@ include dirname(__DIR__, 1) . '\config.php';
         dataType: 'json',
         success: function (data) {
           data.forEach(function (val) {
-            var table_data = '<tr><td>' + val.id + '</td>' +
+            table_data = '<tr><td>' + val.id + '</td>' +
               '<td><a href="/applications/page.php?id=' + val.id + '">' + val.full_name + '</a></td>' +
-              '<td>' +
-              '<button type="button" data-id="'+val.id+'" class="btn">Удалить</button>' +
-              '</td></tr>'
+              '<td><form method="post" class="delete-form" data-id="' + val.id + '">' +
+              '<input type="hidden" name="id" value="' + val.id + '">' +
+              '<p><input type="submit"  class="btn btn-warning" value="Удалить"></p>' +
+              '</form></td></tr>';
             $('#result_table').append(table_data);
           });
         }
       });
 
 
-    $('.btn').on('click', function (event) {
-      console.log('Тестовый текст');
-      event.preventDefault();
-      var id = $(this).data('id');
-      console.log(id);
+      $(document).on('submit', 'form.delete-form', function (event) {
+        console.log('Тестовый текст');
+        event.preventDefault();
+        var id = $(this).data('id');
+        console.log(id);
 
-      $.ajax({
-        url: '/api.php?path=applications&id=' + id,
-        method: 'delete',
-        dataType: 'json',
-        success: function (data) {
-          console.log(data)
-        }
+        $.ajax({
+          url: '/api.php?path=applications&id=' + id,
+          method: 'delete',
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+          }
+        });
       });
     });
-  });
   </script>
 
   <h1>Список заявок</h1>

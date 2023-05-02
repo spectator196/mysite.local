@@ -35,13 +35,29 @@ $data_list = get_db_full_table_managers($_GET);
           data.forEach(function (val) {
             var table_data = '<tr><td>' + val.manager_id + '</td>' +
               '<td><a href="/managers/page.php?manager_id=' + val.manager_id + '">' + val.full_name + '</a></td>' +
-              '<td><form method="post">' +
+              '<td><form method="post" class="delete-form" data-manager_id="' + val.manager_id + '">' +
               '<input type="hidden" name="manager_id" value="' + val.manager_id + '">' +
-              '<p><input type="submit" class="btn btn-warning" value="Удалить"></p>' +
-              '</form></td></tr>'
+              '<p><input type="submit"  class="btn btn-warning" value="Удалить"></p>' +
+              '</form></td></tr>';
             $('#result_table').append(table_data);
           });
         }
+      });
+
+      $(document).on('submit', 'form.delete-form', function (event) {
+        console.log('Тестовый текст');
+        event.preventDefault();
+        var manager_id = $(this).data('manager_id');
+        console.log(manager_id);
+
+        $.ajax({
+          url: '/api.php?path=managers&manager_id=' + manager_id,
+          method: 'delete',
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+          }
+        });
       });
     });
   </script>
