@@ -6,13 +6,11 @@ error_reporting(E_ALL);
 include_once 'get_db_info.php';
 header('Content-type: application/json');
 
-define('ERROR_API_MESSAGES', [
-    'default_api_error' => 'Некорректное обращение к api!',
-    'post_api_error' => 'Некорректное обращение методом POST к api!',
-    'get_api_error' => 'Некорректное обращение методом GET к api!',
-    'put_api_error' => 'Некорректное обращение методом PUT к api!',
-    'delete_api_error' => 'Некорректное обращение методом DELETE к api!'
-]);
+const DEFAULT_API_ERROR = 'Некорректное обращение к api!';
+const POST_API_ERROR = 'Некорректное обращение методом POST к api!!';
+const GET_API_ERROR = 'Некорректное обращение методом GET к api!';
+const PUT_API_ERROR = 'Некорректное обращение методом PUT к api!';
+const DELETE_API_ERROR = 'Некорректное обращение методом DELETE к api!';
 
 define('ALLOWED_REQUEST_METHODS', [
     'GET',
@@ -93,7 +91,7 @@ function api()
 {
     try {
         if (!in_array($_SERVER['REQUEST_METHOD'], ALLOWED_REQUEST_METHODS)) {
-            throw new Exception(ERROR_API_MESSAGES['default_api_error']);
+            throw new Exception(DEFAULT_API_ERROR);
         }
 
         $result = [null];
@@ -119,7 +117,7 @@ function api()
                         break;
 
                     default:
-                        throw new Exception(ERROR_API_MESSAGES['get_api_error']);
+                        throw new Exception(GET_API_ERROR);
 
                 }
                 break;
@@ -131,7 +129,7 @@ function api()
                         if (!empty($_POST)) {
                             $result = application_post_create($_POST);
                         } else {
-                            throw new Exception(ERROR_API_MESSAGES['post_api_error']);
+                            throw new Exception(POST_API_ERROR);
                         }
                         break;
 
@@ -139,12 +137,12 @@ function api()
                         if (!empty($_POST)) {
                             $result = manager_post_create($_POST);
                         } else {
-                            throw new Exception(ERROR_API_MESSAGES['post_api_error']);
+                            throw new Exception(POST_API_ERROR);
                         }
                         break;
 
                     default:
-                        throw new Exception(ERROR_API_MESSAGES['post_api_error']);
+                        throw new Exception(POST_API_ERROR);
 
                 }
                 break;
@@ -156,7 +154,7 @@ function api()
                         if (!empty($_GET['id']) and !empty($_POST)) {
                             $result = application_post_update($_GET['id'], $_POST);
                         } else {
-                            throw new Exception(ERROR_API_MESSAGES['put_api_error']);
+                            throw new Exception(PUT_API_ERROR);
                         }
                         break;
 
@@ -164,12 +162,12 @@ function api()
                         if (!empty($_GET['manager_id']) and !empty($_POST)) {
                             $result = manager_post_update($_GET['manager_id'], $_POST);
                         } else {
-                            throw new Exception(ERROR_API_MESSAGES['put_api_error']);
+                            throw new Exception(PUT_API_ERROR);
                         }
                         break;
 
                     default:
-                        throw new Exception(ERROR_API_MESSAGES['put_api_error']);
+                        throw new Exception(PUT_API_ERROR);
 
                 }
                 break;
@@ -181,7 +179,7 @@ function api()
                         if (!empty($_GET['id'])) {
                             $result = application_post_delete($_GET['id']);
                         } else {
-                            throw new Exception(ERROR_API_MESSAGES['delete_api_error']);
+                            throw new Exception(DELETE_API_ERROR);
                         }
                         break;
 
@@ -189,12 +187,12 @@ function api()
                         if (!empty($_GET['manager_id'])) {
                             $result = manager_post_delete($_GET['manager_id']);
                         } else {
-                            throw new Exception(ERROR_API_MESSAGES['delete_api_error']);
+                            throw new Exception(DELETE_API_ERROR);
                         }
                         break;
 
                     default:
-                        throw new Exception(ERROR_API_MESSAGES['delete_api_error']);
+                        throw new Exception(DELETE_API_ERROR);
 
                 }
                 break;
