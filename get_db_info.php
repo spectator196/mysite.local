@@ -146,13 +146,12 @@ function get_db_specific_application($id): array
     return $result_array;
 }
 
-function edit_db_manager_data($update_params): void
+function edit_db_manager_data($manager_id,$update_params): void
 {
     $sql_request_1_part = 'UPDATE managers SET ';
     $sql_request_2_part = '';
-    $sql_request_3_part = ' WHERE manager_id=' . $update_params['manager_id'];
+    $sql_request_3_part = ' WHERE manager_id=' . $manager_id;
 
-    unset($update_params['manager_id']);
     foreach ($update_params as $key => $data) {
         $sql_request_2_part .= $key . '= "' . $data . '", ';
     }
@@ -173,17 +172,16 @@ function add_db_manager_data($new_data): void
 
 function delete_db_manager_data($data): void
 {
-    $sql_request = 'DELETE FROM managers WHERE manager_id =' . $data['manager_id'];
+    $sql_request = 'DELETE FROM managers WHERE manager_id =' . $data;
     get_mysql_data($sql_request);
 }
 
-function edit_db_application_data($update_params): void
+function edit_db_application_data($id,$update_params): void
 {
     $sql_request_1_part = 'UPDATE applications SET ';
     $sql_request_2_part = '';
-    $sql_request_3_part = ' WHERE id=' . $update_params['id'];
+    $sql_request_3_part = ' WHERE id=' . $id;
 
-    unset($update_params['id']);
     foreach ($update_params as $key => $data) {
         $sql_request_2_part .= $key . '= "' . $data . '", ';
     }
@@ -208,8 +206,8 @@ function add_db_application_data($new_data): void
     get_mysql_data($sql_request);
 }
 
-function delete_db_application_data($data): void
+function delete_db_application_data($id): void
 {
-    $sql_request = 'DELETE FROM applications WHERE id =' . $data['id'];
+    $sql_request = 'DELETE FROM applications WHERE id =' . $id;
     get_mysql_data($sql_request);
 }
